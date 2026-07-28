@@ -19,7 +19,7 @@ const newsletterEnctype = hasNewsletterEndpoint ? FORMS.newsletter.enctype : und
         enctype={newsletterEnctype}
         class="mt-3 flex gap-2"
       >
-        <label for="newsletter-email-compact" class="sr-only">Email address</label>
+        <label for="newsletter-email-compact" class="sr-only">Correo electrónico</label>
         <input
           id="newsletter-email-compact"
           name="email"
@@ -37,7 +37,7 @@ const newsletterEnctype = hasNewsletterEndpoint ? FORMS.newsletter.enctype : und
   ) : (
     <section data-newsletter-cta class="border-t border-border/60 pt-16 pb-10">
       <div class="mx-auto max-w-2xl px-5 text-center">
-        <h2 class="font-serif text-3xl font-semibold sm:text-4xl">A quieter inbox.</h2>
+        <h2 class="font-serif text-3xl font-semibold sm:text-4xl">Un boletín más tranquilo.</h2>
         <p class="mt-3 text-muted-foreground">
           One thoughtful letter every other Sunday &mdash; new essays, things worth reading, and the occasional photograph.
         </p>
@@ -47,7 +47,7 @@ const newsletterEnctype = hasNewsletterEndpoint ? FORMS.newsletter.enctype : und
           enctype={newsletterEnctype}
           class="mx-auto mt-6 flex max-w-md flex-col gap-2 sm:flex-row"
         >
-          <label for="newsletter-email" class="sr-only">Email address</label>
+          <label for="newsletter-email" class="sr-only">Correo electrónico</label>
           <input
             id="newsletter-email"
             name="email"
