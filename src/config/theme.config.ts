@@ -18,6 +18,7 @@ export const NAVIGATION = [
   { to: "/", label: "Inicio" },
   { to: "/blog", label: "Artículos" },
   { to: "/about", label: "Nosotros" },
+  { to: "/categories/sureditores", label: "surEditores" },
   { to: "/contact", label: "Contacto" },
 ];
 
@@ -60,12 +61,24 @@ export const authors = [
 
 export const categories = [
   { slug: "general", name: "General" },
-  { slug: "essays", name: "Ensayos" },
-  { slug: "interviews", name: "Entrevistas" },
+  { slug: "ensayos", name: "Ensayos" },
+  { slug: "entrevistas", name: "Entrevistas" },
+  { slug: "convocatorias", name: "Convocatorias" },
+  { slug: "noticias", name: "Noticias" },
+  { slug: "sureditores", name: "surEditores" },
 ];
 
 export const tags = [
-  { slug: "writing", name: "Escritura" },
-  { slug: "poetry", name: "Poesía" },
+  { slug: "escritura", name: "Escritura" },
+  { slug: "poesia", name: "Poesía" },
   { slug: "habana", name: "La Habana" },
+  { slug: "palestina", name: "Palestina" },
+  { slug: "mitin-virtual", name: "Mitin Virtual" },
+  { slug: "festival-2024", name: "Festival 2024" },
+  { slug: "festival-2025", name: "Festival 2025" },
+  { slug: "festival-2026", name: "Festival 2026" },
+  { slug: "festival-2027", name: "Festival 2027" },
+  { slug: "homenaje", name: "Homenaje" },
+  { slug: "libros", name: "Libros" },
+  { slug: "ebooks", name: "E-books" },
 ];
