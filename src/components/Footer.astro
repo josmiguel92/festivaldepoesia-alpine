@@ -9,7 +9,11 @@ const { flush = false } = Astro.props;
 <footer class:list={[flush ? "mt-0" : "mt-24", "border-t border-border/60"]}>
   <div class="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-4">
     <div class="md:col-span-2">
-      <div class="font-serif text-lg font-semibold">{SITE.name}</div>
+      <div class="flex items-center gap-2">
+        <img src="/logo-dark.svg" alt={SITE.name} class="h-6 hidden dark:block" />
+        <img src="/logo.svg" alt={SITE.name} class="h-6 dark:hidden" />
+        <div class="font-serif text-lg font-semibold ml-2">{SITE.name}</div>
+      </div>
       <p class="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
         {SITE.description}
       </p>
@@ -24,7 +28,7 @@ const { flush = false } = Astro.props;
       </div>
     </div>
     <div>
-      <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Sections</div>
+      <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Secciones</div>
       <ul class="mt-3 space-y-2 text-sm">
         {
           categories.slice(0, 5).map((category) => (
@@ -38,11 +42,11 @@ const { flush = false } = Astro.props;
       </ul>
     </div>
     <div>
-      <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">The site</div>
+      <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">El sitio</div>
       <ul class="mt-3 space-y-2 text-sm">
-        <li><a href="/about" class="hover:text-foreground">About</a></li>
-        <li><a href="/contact" class="hover:text-foreground">Contact</a></li>
-        <li><a href="/blog" class="hover:text-foreground">Archive</a></li>
+        <li><a href="/about" class="hover:text-foreground">Acerca</a></li>
+        <li><a href="/contact" class="hover:text-foreground">Contacto</a></li>
+        <li><a href="/blog" class="hover:text-foreground">Archivo</a></li>
         <li><a href="/rss.xml" class="hover:text-foreground">RSS feed</a></li>
       </ul>
     </div>
@@ -50,7 +54,7 @@ const { flush = false } = Astro.props;
   <div class="border-t border-border/60">
     <div class="mx-auto flex max-w-6xl flex-col items-start justify-between gap-2 px-5 py-5 text-xs text-muted-foreground sm:flex-row sm:items-center">
       <div>&copy; {new Date().getFullYear()} {SITE.name}. Hecho para la web abierta.</div>
-      <div>Set in Fraunces &amp; Inter.</div>
+      <div>Diseñado con Fraunces e Inter.</div>
     </div>
   </div>
 </footer>

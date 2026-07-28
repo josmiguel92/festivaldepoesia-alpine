@@ -20,6 +20,8 @@ const iconClass = isHome
 <header class={headerClass} data-home-header={isHome ? "true" : undefined} data-scrolled="false">
   <div class="relative mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
     <a href="/" class="flex items-center gap-2">
+      <img src="/logo-dark.svg" alt={SITE.name} class={`h-8 hidden dark:block ${isHome ? "home-header-brand" : ""}`} />
+      <img src="/logo.svg" alt={SITE.name} class={`h-8 dark:hidden ${isHome ? "home-header-brand" : ""}`} />
       <span class={`font-serif text-xl font-semibold ${isHome ? "home-header-brand" : ""}`}>{SITE.name}</span>
     </a>
 
