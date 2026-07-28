@@ -10,8 +10,7 @@ const { flush = false } = Astro.props;
   <div class="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-4">
     <div class="md:col-span-2">
       <div class="flex items-center gap-2">
-        <img src="/logo-dark.svg" alt={SITE.name} class="h-6 hidden dark:block" />
-        <img src="/logo.svg" alt={SITE.name} class="h-6 dark:hidden" />
+        <img src="/logo.svg" alt={SITE.name} class="h-6" />
         <div class="font-serif text-lg font-semibold ml-2">{SITE.name}</div>
       </div>
       <p class="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
