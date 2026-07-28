@@ -54,9 +54,10 @@ const { Content } = await render(book);
           <div class="mt-8">
             <a 
               href={book.data.downloadUrl} 
-              class="inline-flex items-center justify-center px-6 py-3 border border-divider-color rounded-md text-sm font-medium hover:bg-page-background-alt transition-colors"
+              download
+              class="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 transition-colors shadow-sm"
             >
-              Descargar Libro
+              Descargar eBook
             </a>
           </div>
         )}

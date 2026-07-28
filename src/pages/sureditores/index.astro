@@ -3,7 +3,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 
-const books = await getCollection('books');
+const allBooks = await getCollection('books');
+const ebooks = allBooks.filter(book => book.data.downloadUrl);
+const printBooks = allBooks.filter(book => !book.data.downloadUrl);
 ---
 
 <BaseLayout title="surEditores - Libros y Publicaciones" description="Colección de libros y publicaciones de surEditores">
@@ -18,42 +20,84 @@ const books = await getCollection('books');
       </p>
       
       <div class="mt-8 flex flex-col sm:flex-row justify-center items-center gap-6">
-        <a href="/sureditores/noticias" class="inline-flex items-center justify-center rounded-full bg-accent-color px-6 py-2 text-sm font-medium text-white hover:bg-accent-color/90 transition-all">
+        <a href="/sureditores/noticias" class="inline-flex items-center justify-center rounded-full bg-primary px-6 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-all shadow-sm">
           Ver Archivo de Noticias
         </a>
-        <a href="/directorio/poetas" class="inline-flex items-center text-accent-color font-medium hover:underline underline-offset-4 transition-all">
+        <a href="/directorio/poetas" class="inline-flex items-center text-primary font-medium hover:underline underline-offset-4 transition-all">
           Explorar Directorio de Poetas <span class="ml-2">→</span>
         </a>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12">
-      {books.map(book => (
-        <a href={`/sureditores/libros/${book.id}`} class="group flex flex-col items-start transition-transform hover:-translate-y-1">
-          <div class="w-full aspect-[2/3] mb-4 overflow-hidden rounded-md bg-page-background-alt shadow-md border border-divider-color relative">
-            {book.data.cover ? (
-              <Image 
-                src={book.data.cover} 
-                alt={`Portada de ${book.data.title}`}
-                width={300}
-                class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
-              />
-            ) : (
-              <div class="w-full h-full flex flex-col items-center justify-center relative overflow-hidden bg-card p-6">
-                <div class="absolute inset-0 z-0 opacity-10" style="background-image: repeating-linear-gradient(45deg, var(--foreground) 0, var(--foreground) 1px, transparent 1px, transparent 10px);"></div>
-                <div class="absolute inset-0 z-0 bg-gradient-to-t from-card via-transparent to-transparent"></div>
-                <span class="relative z-10 font-semibold text-center text-primary-text/80 text-xl line-clamp-5 leading-snug">{book.data.title}</span>
+    {ebooks.length > 0 && (
+      <div class="mb-20">
+        <div class="flex items-center justify-between mb-8 border-b border-divider-color pb-4">
+          <h2 class="text-2xl font-bold text-primary-text font-serif">eBooks</h2>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-8">
+          {ebooks.map(book => (
+            <a href={`/sureditores/libros/${book.id}`} class="group flex flex-col items-start transition-transform hover:-translate-y-1 relative">
+              <div class="w-full aspect-[2/3] mb-3 overflow-hidden rounded-md bg-page-background-alt shadow-sm border border-divider-color relative">
+                {book.data.cover ? (
+                  <Image 
+                    src={book.data.cover} 
+                    alt={`Portada de ${book.data.title}`}
+                    width={200}
+                    class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+                  />
+                ) : (
+                  <div class="w-full h-full flex flex-col items-center justify-center relative overflow-hidden bg-card p-4">
+                    <div class="absolute inset-0 z-0 opacity-10" style="background-image: repeating-linear-gradient(45deg, var(--foreground) 0, var(--foreground) 1px, transparent 1px, transparent 10px);"></div>
+                    <div class="absolute inset-0 z-0 bg-gradient-to-t from-card via-transparent to-transparent"></div>
+                    <span class="relative z-10 font-semibold text-center text-primary-text/80 text-sm line-clamp-4 leading-snug">{book.data.title}</span>
+                  </div>
+                )}
+                
               </div>
+              <h3 class="text-sm font-medium leading-snug text-primary-text group-hover:text-primary transition-colors line-clamp-2">
+                {book.data.title}
+              </h3>
+              {book.data.authorName && (
+                <p class="text-xs text-secondary-text mt-1 line-clamp-1">{book.data.authorName}</p>
+              )}
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <div>
+      <div class="flex items-center justify-between mb-8 border-b border-divider-color pb-4">
+        <h2 class="text-2xl font-bold text-primary-text font-serif">Catálogo Impreso</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12">
+        {printBooks.map(book => (
+          <a href={`/sureditores/libros/${book.id}`} class="group flex flex-col items-start transition-transform hover:-translate-y-1">
+            <div class="w-full aspect-[2/3] mb-4 overflow-hidden rounded-md bg-page-background-alt shadow-md border border-divider-color relative">
+              {book.data.cover ? (
+                <Image 
+                  src={book.data.cover} 
+                  alt={`Portada de ${book.data.title}`}
+                  width={300}
+                  class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+                />
+              ) : (
+                <div class="w-full h-full flex flex-col items-center justify-center relative overflow-hidden bg-card p-6">
+                  <div class="absolute inset-0 z-0 opacity-10" style="background-image: repeating-linear-gradient(45deg, var(--foreground) 0, var(--foreground) 1px, transparent 1px, transparent 10px);"></div>
+                  <div class="absolute inset-0 z-0 bg-gradient-to-t from-card via-transparent to-transparent"></div>
+                  <span class="relative z-10 font-semibold text-center text-primary-text/80 text-xl line-clamp-5 leading-snug">{book.data.title}</span>
+                </div>
+              )}
+            </div>
+            <h3 class="text-lg font-medium leading-snug text-primary-text group-hover:text-primary transition-colors line-clamp-2">
+              {book.data.title}
+            </h3>
+            {book.data.authorName && (
+              <p class="text-sm text-secondary-text mt-1 line-clamp-1">{book.data.authorName}</p>
             )}
-          </div>
-          <h2 class="text-lg font-medium leading-snug text-primary-text group-hover:text-accent-color transition-colors line-clamp-2">
-            {book.data.title}
-          </h2>
-          {book.data.authorName && (
-            <p class="text-sm text-secondary-text mt-1 line-clamp-1">{book.data.authorName}</p>
-          )}
-        </a>
-      ))}
+          </a>
+        ))}
+      </div>
     </div>
   </main>
 </BaseLayout>
