@@ -247,6 +247,24 @@ const jsonLd = {
             crossorigin="anonymous"
             async>
           </script>
+          <script>
+            function setGiscusTheme() {
+              const iframe = document.querySelector('iframe.giscus-frame');
+              if (!iframe) return;
+              const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+              iframe.contentWindow.postMessage({ giscus: { setConfig: { theme } } }, 'https://giscus.app');
+            }
+
+            // Sync on load
+            window.addEventListener('message', (event) => {
+              if (event.origin !== 'https://giscus.app') return;
+              setGiscusTheme();
+            });
+
+            // Sync on toggle
+            const observer = new MutationObserver(setGiscusTheme);
+            observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+          </script>
         </div>
       </div>
 
