@@ -32,5 +32,3 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
           server-dir: ./public/
-          # Hacemos que borre los archivos viejos de Astro antes de subir los nuevos
-          dangerous-clean-slate: true
