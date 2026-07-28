@@ -54,7 +54,7 @@ export const authors = [
     bio: "Sitio oficial del Festival de Poesía de La Habana.",
     longBio:
       "Sitio oficial del Festival de Poesía de La Habana, promoviendo la literatura y la cultura.",
-    avatar: "/avatars/elena-march.svg",
+    avatar: "/avatar.png",
   },
 ];
 

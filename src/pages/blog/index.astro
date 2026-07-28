@@ -14,10 +14,10 @@ const posts = await sortedPosts();
   canonical="/blog"
 >
   <div class="mx-auto max-w-4xl px-5 py-12" data-archive>
-    <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Archive" }]} />
-    <h1 class="mt-4 font-serif text-4xl font-semibold sm:text-5xl">The archive</h1>
+    <Breadcrumbs items={[{ label: "Inicio", to: "/" }, { label: "Archivo" }]} />
+    <h1 class="mt-4 font-serif text-4xl font-semibold sm:text-5xl">El archivo</h1>
     <p class="mt-3 max-w-xl text-muted-foreground">
-      Every piece we've published. {posts.length} essays, field notes, and interviews.
+      Cada artículo publicado. {posts.length} publicaciones, convocatorias y noticias.
     </p>
 
     <form data-archive-search class="mt-8 flex items-center gap-2 border-b border-border pb-2">
@@ -25,8 +25,8 @@ const posts = await sortedPosts();
       <input
         data-archive-query
         name="q"
-        aria-label="Search the archive"
-        placeholder="Search the archive..."
+        aria-label="Buscar en el archivo"
+        placeholder="Buscar en el archivo..."
         class="w-full border-0 bg-transparent py-2 outline-none placeholder:text-muted-foreground"
       />
       <button
@@ -35,14 +35,14 @@ const posts = await sortedPosts();
         class="text-xs text-muted-foreground hover:text-foreground"
         hidden
       >
-        Clear
+        Limpiar
       </button>
     </form>
 
     <div class="mt-6 space-y-4 text-sm">
       <div class="flex flex-wrap items-center gap-2">
-        <span class="text-xs uppercase tracking-wider text-muted-foreground">Categories</span>
-        <a data-category-filter="" href="/blog" class="rounded-full border px-3 py-1 text-xs">All</a>
+        <span class="text-xs uppercase tracking-wider text-muted-foreground">Categorías</span>
+        <a data-category-filter="" href="/blog" class="rounded-full border px-3 py-1 text-xs">Todas</a>
         {
           categories.map((category) => (
             <a data-category-filter={category.slug} href={`/categories/${category.slug}`} class="rounded-full border px-3 py-1 text-xs">
@@ -52,7 +52,7 @@ const posts = await sortedPosts();
         }
       </div>
       <div class="flex flex-wrap items-center gap-2">
-        <span class="text-xs uppercase tracking-wider text-muted-foreground">Tags</span>
+        <span class="text-xs uppercase tracking-wider text-muted-foreground">Etiquetas</span>
         {
           tags.map((tag) => (
             <a data-tag-filter={tag.slug} href={`/tags/${tag.slug}`} class="rounded-full border px-2.5 py-0.5 text-xs">
@@ -66,8 +66,8 @@ const posts = await sortedPosts();
     <div data-archive-count class="mt-6 text-sm text-muted-foreground"></div>
 
     <div data-archive-empty class="mt-12 rounded-md border border-dashed border-border py-20 text-center" hidden>
-      <div class="font-serif text-lg">No matches</div>
-      <p class="mt-2 text-sm text-muted-foreground">Try a different word, or clear the filters.</p>
+      <div class="font-serif text-lg">Sin resultados</div>
+      <p class="mt-2 text-sm text-muted-foreground">Intente con una palabra diferente o limpie los filtros.</p>
     </div>
 
     <div data-archive-list>
