@@ -22,9 +22,9 @@ export const NAVIGATION = [
 ];
 
 export const CONTACT = {
-  email: "contacto@festivaldepoesia.com",
-  socialHandle: "@cubapoesia",
-  socialUrl: "https://x.com/cubapoesia",
+  email: "karelalexei@gmail.com", // Other emails: maripolo.cu@gmail.com, alpausanias@gmail.com
+  socialHandle: "@festivalpoesia",
+  socialUrl: "https://www.festivaldepoesiadelahabana.com/",
 };
 
 export const FORMS = {
