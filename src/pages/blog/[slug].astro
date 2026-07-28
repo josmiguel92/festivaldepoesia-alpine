@@ -186,7 +186,6 @@ const jsonLd = {
           <a target="_blank" rel="noreferrer" aria-label="Compartir en X" data-share-x data-share-title={post.title} href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(shareUrl)}`} class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground hover:text-primary"><Icon name="x-social" class="h-3.5 w-3.5" /></a>
           <a target="_blank" rel="noreferrer" aria-label="Compartir en Facebook" data-share-facebook href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`} class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground hover:text-primary"><Icon name="facebook" class="h-3.5 w-3.5" /></a>
           <a target="_blank" rel="noreferrer" aria-label="Compartir en LinkedIn" data-share-linkedin href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`} class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground hover:text-primary"><Icon name="linkedin" class="h-3.5 w-3.5" /></a>
-          <a target="_blank" rel="noreferrer" aria-label="Ir a Instagram" data-share-instagram href="https://www.instagram.com/" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground hover:text-primary"><Icon name="instagram" class="h-3.5 w-3.5" /></a>
           <button type="button" data-copy-link class="ml-auto inline-flex items-center gap-2 rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground">
             <span data-copy-ready class="inline-flex items-center gap-2"><Icon name="copy" class="h-3.5 w-3.5" /> Copiar enlace</span>
             <span data-copy-done class="inline-flex items-center gap-2" hidden><Icon name="check" class="h-3.5 w-3.5" /> Copiado</span>
@@ -248,7 +247,7 @@ const jsonLd = {
     {
       related.length > 0 && (
         <section class="mt-20 border-t border-border pt-12">
-          <h2 class="font-serif text-2xl font-semibold">Continue reading</h2>
+          <h2 class="font-serif text-2xl font-semibold">Seguir leyendo</h2>
           <div class="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((relatedPost) => <PostCard post={relatedPost} />)}
           </div>
