@@ -18,16 +18,30 @@ const estimateReadingTime = (text = "") => {
 
 export const imageSrc = (image) => (typeof image === "string" ? image : image?.src);
 
-export const normalizePost = (entry) => ({
+const assets = import.meta.glob("/src/assets/*.{jpeg,jpg,png,gif,webp,PNG}");
+export const resolveImage = async (imagePath) => {
+  if (typeof imagePath !== "string") return imagePath;
+  const filename = imagePath.split("/").pop();
+  const key = `/src/assets/${filename}`;
+  if (assets[key]) {
+    const mod = await assets[key]();
+    return mod.default;
+  }
+  return imagePath;
+};
+
+export const normalizePost = async (entry) => ({
   slug: entry.id,
   ...entry.data,
+  tags: entry.data.tags || [],
+  thumbnail: await resolveImage(entry.data.thumbnail),
   date: isoDate(entry.data.date),
   updated: isoDate(entry.data.updated),
   readingTime: entry.data.readingTime ?? estimateReadingTime(entry.body),
 });
 
 export const posts = async () =>
-  (await getCollection("blog", ({ data }) => !data.draft)).map(normalizePost);
+  Promise.all((await getCollection("blog", ({ data }) => !data.draft)).map(normalizePost));
 
 export const getPost = async (slug) => (await posts()).find((post) => post.slug === slug);
 export const getAuthor = (slug) => authors.find((author) => author.slug === slug);

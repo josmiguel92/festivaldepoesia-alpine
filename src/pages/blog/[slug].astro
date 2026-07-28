@@ -24,7 +24,7 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const post = normalizePost(entry);
+const post = await normalizePost(entry);
 const author = getAuthor(post.author);
 const category = getCategory(post.category);
 const { Content, headings } = await render(entry);
@@ -39,7 +39,8 @@ const related = await relatedPosts(post);
 const { prev, next } = await adjacentPosts(post);
 const canonical = post.canonical ?? `/blog/${post.slug}`;
 const canonicalUrl = new URL(canonical, SITE.url).toString();
-const socialImage = post.thumbnail
+const thumbnailIsString = typeof post.thumbnail === "string";
+const socialImage = post.thumbnail && !thumbnailIsString
   ? await getImage({
       src: post.thumbnail,
       width: 1200,
@@ -48,7 +49,11 @@ const socialImage = post.thumbnail
       quality: 78,
     })
   : undefined;
-const thumbnailUrl = socialImage ? new URL(socialImage.src, SITE.url).toString() : undefined;
+const thumbnailUrl = thumbnailIsString
+  ? new URL(post.thumbnail, SITE.url).toString()
+  : socialImage 
+    ? new URL(socialImage.src, SITE.url).toString() 
+    : undefined;
 const shareUrl = canonicalUrl;
 const jsonLd = {
   "@context": "https://schema.org",
@@ -68,7 +73,7 @@ const jsonLd = {
   description={post.seoDescription ?? post.excerpt}
   canonical={canonical}
   ogType="article"
-  ogImage={socialImage?.src}
+  ogImage={thumbnailIsString ? post.thumbnail : socialImage?.src}
   jsonLd={jsonLd}
   flushFooter
 >
@@ -119,15 +124,23 @@ const jsonLd = {
       post.thumbnail && (
         <figure class="mx-auto mt-10 max-w-4xl">
           <div class="overflow-hidden rounded-md bg-muted">
-            <Image
-              src={post.thumbnail}
-              alt={post.thumbnailAlt || post.imageCredit?.caption || ""}
-              class="w-full"
-              widths={[640, 960, 1280, 1600]}
-              sizes="(min-width: 1024px) 896px, calc(100vw - 40px)"
-              format="webp"
-              quality={78}
-            />
+            {thumbnailIsString ? (
+              <img
+                src={post.thumbnail}
+                alt={post.thumbnailAlt || post.imageCredit?.caption || ""}
+                class="w-full"
+              />
+            ) : (
+              <Image
+                src={post.thumbnail}
+                alt={post.thumbnailAlt || post.imageCredit?.caption || ""}
+                class="w-full"
+                widths={[640, 960, 1280, 1600]}
+                sizes="(min-width: 1024px) 896px, calc(100vw - 40px)"
+                format="webp"
+                quality={78}
+              />
+            )}
           </div>
           {
             post.imageCredit && (
