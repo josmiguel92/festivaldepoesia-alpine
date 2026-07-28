@@ -1,0 +1,18 @@
+image: node:20-alpine
+
+pages:
+  stage: deploy
+  cache:
+    paths:
+      - node_modules/
+  script:
+    - npm ci
+    - npm run build
+    # Astro builds to `dist` by default, pero GitLab Pages requiere la carpeta `public`
+    - rm -rf public
+    - cp -r dist public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
