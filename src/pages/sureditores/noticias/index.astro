@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PostCard from '../../../components/PostCard.astro';
+import { sortedPosts } from "../../../lib/blog-data.js";
+
+const allPosts = await sortedPosts();
+const noticias = allPosts.filter(post => post.category?.toLowerCase() === 'colección sur');
+---
+
+<BaseLayout title="Archivo de Noticias - surEditores" description="Noticias y artículos históricos sobre la Colección SurEditores">
+  <main class="max-w-[1200px] mx-auto px-6 py-12 md:py-20 lg:py-24">
+    <div class="text-center mb-16">
+      <a href="/sureditores" class="inline-flex items-center text-secondary-text hover:text-primary transition-colors mb-6 text-sm font-medium">
+        ← Volver a surEditores
+      </a>
+      <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-primary-text mb-4">
+        Archivo de Noticias
+      </h1>
+      <p class="text-xl text-secondary-text max-w-2xl mx-auto">
+        Explora la historia de nuestra colección a través de esta selección de artículos rescatados del archivo histórico.
+      </p>
+    </div>
+
+    {noticias.length > 0 ? (
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {noticias.map((post) => (
+          <PostCard post={post} />
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-20 text-secondary-text">
+        <p>No se encontraron artículos históricos para esta colección.</p>
+      </div>
+    )}
+  </main>
+</BaseLayout>

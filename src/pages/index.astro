@@ -195,6 +195,48 @@ const latest = (await sortedPosts()).filter((post) => post.slug !== featured?.sl
     </div>
   </section>
 
+  <section class="mx-auto max-w-6xl px-5 py-12 md:py-16">
+    <div class="grid md:grid-cols-2 gap-8">
+      <a href="/sureditores" class="group relative overflow-hidden rounded-xl border border-border bg-card p-8 flex flex-col items-start shadow-sm transition-all hover:-translate-y-1 hover:shadow-md">
+        <!-- Texture Background -->
+        <div class="absolute inset-0 z-0 opacity-[0.05] transition-opacity duration-500 group-hover:opacity-[0.1]" style="background-image: repeating-linear-gradient(45deg, var(--foreground) 0, var(--foreground) 1px, transparent 1px, transparent 12px);"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-card via-card/80 to-transparent"></div>
+        
+        <div class="relative z-10 flex flex-col h-full w-full">
+          <div class="self-start mb-4 inline-flex items-center justify-center h-12">
+            <img src="/surligth_min.png" alt="surEditores" class="h-full w-auto brightness-0 dark:invert opacity-80" />
+          </div>
+          <h2 class="text-2xl font-semibold mb-3 group-hover:text-primary transition-colors">surEditores</h2>
+          <p class="text-muted-foreground mb-6 flex-1">
+            Descubre nuestra colección de libros y publicaciones literarias exclusivas rescatadas de nuestro archivo histórico.
+          </p>
+          <span class="inline-flex items-center gap-2 font-medium text-primary">
+            Ver libros <Icon name="arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </span>
+        </div>
+      </a>
+
+      <a href="/directorio/poetas" class="group relative overflow-hidden rounded-xl border border-border bg-card p-8 flex flex-col items-start shadow-sm transition-all hover:-translate-y-1 hover:shadow-md">
+        <!-- Texture Background -->
+        <div class="absolute inset-0 z-0 opacity-[0.1] transition-opacity duration-500 group-hover:opacity-[0.2]" style="background-image: radial-gradient(var(--foreground) 1px, transparent 1px); background-size: 16px 16px;"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-tr from-card via-card/80 to-transparent"></div>
+
+        <div class="relative z-10 flex flex-col h-full w-full">
+          <div class="self-start mb-4 inline-flex items-center justify-center rounded-full bg-primary/10 p-3 text-primary">
+            <Icon name="globe" class="h-6 w-6" />
+          </div>
+          <h2 class="text-2xl font-semibold mb-3 group-hover:text-primary transition-colors">Directorio de Poetas</h2>
+          <p class="text-muted-foreground mb-6 flex-1">
+            Explora los perfiles de decenas de poetas internacionales, sus biografías detalladas y una cuidada selección de sus poemas.
+          </p>
+          <span class="inline-flex items-center gap-2 font-medium text-primary">
+            Conocer a los poetas <Icon name="arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </span>
+        </div>
+      </a>
+    </div>
+  </section>
+
   <Newsletter />
 </BaseLayout>
 

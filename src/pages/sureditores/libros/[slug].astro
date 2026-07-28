@@ -1,0 +1,66 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+
+export async function getStaticPaths() {
+  const books = await getCollection('books');
+  return books.map((book) => ({
+    params: { slug: book.id },
+    props: { book },
+  }));
+}
+
+const { book } = Astro.props;
+const { Content } = await render(book);
+---
+
+<BaseLayout title={`${book.data.title} - surEditores`} description={book.data.authorName}>
+  <main class="max-w-[700px] mx-auto px-6 py-12 md:py-20 lg:py-24">
+    <div class="flex flex-col md:flex-row gap-10">
+      {book.data.cover && (
+        <div class="w-full md:w-1/3 flex-shrink-0">
+          <Image 
+            src={book.data.cover} 
+            alt={`Portada de ${book.data.title}`} 
+            width={300} 
+            class="w-full h-auto rounded-lg shadow-xl object-cover" 
+          />
+        </div>
+      )}
+      
+      <div class="w-full md:w-2/3 flex flex-col justify-center">
+        <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-primary-text mb-2">
+          {book.data.title}
+        </h1>
+        
+        {book.data.authorName && (
+          <p class="text-lg md:text-xl text-secondary-text mb-6">
+            Por {book.data.authorId ? (
+              <a href={`/directorio/poetas/${book.data.authorId}`} class="hover:text-primary-text underline decoration-secondary-text/30 underline-offset-4 transition-colors">
+                {book.data.authorName}
+              </a>
+            ) : (
+              book.data.authorName
+            )}
+          </p>
+        )}
+        
+        <div class="prose prose-lg prose-neutral prose-a:text-secondary-text hover:prose-a:text-primary-text max-w-none text-secondary-text mt-4">
+          <Content />
+        </div>
+        
+        {book.data.downloadUrl && (
+          <div class="mt-8">
+            <a 
+              href={book.data.downloadUrl} 
+              class="inline-flex items-center justify-center px-6 py-3 border border-divider-color rounded-md text-sm font-medium hover:bg-page-background-alt transition-colors"
+            >
+              Descargar Libro
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
+  </main>
+</BaseLayout>

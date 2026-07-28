@@ -17,8 +17,9 @@ export const SITE = {
 export const NAVIGATION = [
   { to: "/", label: "Inicio" },
   { to: "/blog", label: "Artículos" },
+  { to: "/sureditores", label: "surEditores" },
+  { to: "/directorio/poetas", label: "Directorio" },
   { to: "/about", label: "Nosotros" },
-  { to: "/categories/sureditores", label: "surEditores" },
   { to: "/contact", label: "Contacto" },
 ];
 

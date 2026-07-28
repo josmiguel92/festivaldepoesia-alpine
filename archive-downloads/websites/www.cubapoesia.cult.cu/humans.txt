@@ -1,0 +1,24 @@
+	/* TEAM */
+    programador y diseñador: Josué Aguilar Polo
+    email: josmiguel92[at]gmail.com
+    Twitter: @JosueAguilar92
+	Facebook: http://www.facebook.com/josueapolo
+    Location: La Habana, La Lisa, Cuba.
+	
+	editora: Teresa Cuesta Reyes
+    Location: La Habana, Cuba.
+	
+	manager: Alex Pausides Aguilar Licea
+	Facebook: http://www.facebook.com/josueapolo
+    Location: La Habana, Cuba.
+
+	
+	/* THANKS */
+	Nombre: Maria de los Angeles Polo Vega
+			
+	
+	/* SITE */
+    Last update: 2012/005/26
+    Standards: HTML5, CSS3,..
+    Components: WordPress, jQuery, etc.
+    Software: Firefox+Firebug, Notepad++,Kompozer, FileZilla, Photoshop

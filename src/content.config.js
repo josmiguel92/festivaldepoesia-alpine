@@ -37,4 +37,47 @@ const blog = defineCollection({
     }),
 });
 
-export const collections = { blog };
+const books = defineCollection({
+  loader: glob({
+    pattern: "**/index.mdx",
+    base: "./src/content/books",
+    generateId: ({ entry }) => entry.replace(/[\\/]index\.mdx$/, "").replace(/\\/g, "/"),
+  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      cover: image().optional(),
+      authorId: z.string().optional(), // slug of the poet
+      authorName: z.string().optional(), // fallback text
+      downloadUrl: z.string().optional(),
+    }),
+});
+
+const poets = defineCollection({
+  loader: glob({
+    pattern: "**/index.mdx",
+    base: "./src/content/poets",
+    generateId: ({ entry }) => entry.replace(/[\\/]index\.mdx$/, "").replace(/\\/g, "/"),
+  }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      photo: image().optional(),
+    }),
+});
+
+const poems = defineCollection({
+  loader: glob({
+    pattern: "**/index.mdx",
+    base: "./src/content/poems",
+    generateId: ({ entry }) => entry.replace(/[\\/]index\.mdx$/, "").replace(/\\/g, "/"),
+  }),
+  schema: () =>
+    z.object({
+      title: z.string(),
+      poetId: z.string(), // slug of the poet
+    }),
+});
+
+export const collections = { blog, books, poets, poems };
+
