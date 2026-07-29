@@ -51,6 +51,23 @@ function escapeMDX(str) {
   return str.replace(/([{}])/g, '\\$1');
 }
 
+function copyEbook(slug) {
+  const uploadsDir = path.join(BASE_DIR, 'uploads/default/0001/01');
+  if (!fs.existsSync(uploadsDir)) return '';
+  const files = fs.readdirSync(uploadsDir);
+  for (const file of files) {
+    if ((file.endsWith('.epub') || file.endsWith('.pdf')) && file.includes(slug)) {
+      const srcPath = path.join(uploadsDir, file);
+      const destDir = path.join(__dirname, '../public/ebooks');
+      if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
+      const destPath = path.join(destDir, file);
+      fs.copyFileSync(srcPath, destPath);
+      return `/ebooks/${file}`;
+    }
+  }
+  return '';
+}
+
 function extractBooks() {
   const booksDir = path.join(BASE_DIR, 'books');
   if (!fs.existsSync(booksDir)) return;
@@ -74,8 +91,14 @@ function extractBooks() {
     }
     const newCoverSrc = copyImage(coverSrc, path.dirname(indexPath));
     
+    // Check for an ebook in the uploads folder
+    const ebookUrl = copyEbook(slug);
+    
     // Find author description/name
     item.find('img').remove();
+    // Remove the download link text from description
+    item.find('p').filter(function() { return $(this).text().match(/Tambien diponible|descarga|eBook/i); }).remove();
+    
     const descriptionHtml = item.find('p').html() || '';
     const descriptionText = item.find('p').text().trim();
     const descriptionMd = escapeMDX(turndownService.turndown(descriptionHtml));
@@ -90,6 +113,7 @@ title: ${JSON.stringify(title)}
     if (newCoverSrc) frontmatter += `cover: "${newCoverSrc}"\n`;
     if (authorId) frontmatter += `authorId: "${authorId}"\n`;
     if (authorName) frontmatter += `authorName: ${JSON.stringify(authorName)}\n`;
+    if (ebookUrl) frontmatter += `downloadUrl: "${ebookUrl}"\n`;
     
     frontmatter += `---\n\n${descriptionMd}`;
     
