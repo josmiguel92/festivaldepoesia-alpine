@@ -118,9 +118,12 @@ function extractPoets() {
     
     const photoSrc = item.find('.autor-face').attr('src');
     const newPhotoSrc = copyImage(photoSrc, path.dirname(indexPath));
+    item.find('h3').remove();
+    item.find('.name-author').remove();
+    item.find('.clear').remove();
     item.find('img').remove(); // Remove all images to avoid MDX import errors
     
-    const bioHTML = item.find('p').html() || item.html() || '';
+    const bioHTML = item.html() || '';
     const bioMd = escapeMDX(turndownService.turndown(bioHTML));
     
     let frontmatter = `---
@@ -157,8 +160,11 @@ function extractPoems() {
       let title = item.find('h3').text().trim();
       if (!title) return;
       
+      item.find('h3').remove();
+      item.find('.name-author').remove();
+      item.find('.clear').remove();
       item.find('img').remove();
-      let contentHtml = item.find('p').html() || '';
+      let contentHtml = item.html() || '';
       
       // Preserve poem verse structure
       contentHtml = contentHtml.replace(/<br\s*\/?>\n?/gi, '\n');
