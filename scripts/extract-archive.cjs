@@ -55,9 +55,25 @@ function extractArticle(filePath) {
     
     if (processedSlugs.has(slug)) return;
 
-    const dateStr = $('time.entry-date').attr('datetime');
-    const contentHtml = $('.entry-content').html();
+    let dateStr = $('time.entry-date').attr('datetime');
+    if (!dateStr) {
+        dateStr = $('.date .value-title').attr('title');
+    }
+    if (!dateStr) {
+        const month = parts[parts.length - 3];
+        const year = parts[parts.length - 4];
+        if (year && year.match(/^\d{4}$/) && month && month.match(/^\d{2}$/)) {
+            dateStr = `${year}-${month}-01T12:00:00Z`;
+        }
+    }
+    
+    let contentHtml = $('.entry-content').html();
     if (!contentHtml) return;
+    
+    const $content = cheerio.load(contentHtml, null, false);
+    $content('img').remove();
+    $content('noscript').remove();
+    contentHtml = $content.html();
 
     let author = $('.author.vcard .fn').first().text().trim() || 'CubaPoesía';
     let category = $('.cat-links a').first().text().trim() || 'Archivo Histórico';
