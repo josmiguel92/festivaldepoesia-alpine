@@ -1,7 +1,7 @@
 {
-  "name": "quiet-pages",
+  "name": "festivaldepoesia-alpine",
   "version": "2.1.0",
-  "description": "A quiet Astro magazine theme for essays, field notes, and long-form writing.",
+  "description": "Sitio oficial del Festival de Poesía de La Habana.",
   "private": true,
   "license": "MIT",
   "type": "module",
